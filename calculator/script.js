@@ -63,6 +63,16 @@
     }
   }
 
+  function inputSqrt() {
+    const value = parseFloat(state.displayValue);
+    if (value >= 0) {
+        state.displayValue = formatNumber(Math.sqrt(value));
+        setDisplay(state.displayValue);
+    } else {
+        showError("Invalid input for sqrt");
+    }
+  }
+
   function deleteLast() {
     if (state.waitingForSecondOperand || state.justEvaluated) return;
     const v = state.displayValue;
@@ -164,6 +174,7 @@
     if (btn.dataset.action === 'clear') return resetAll();
     if (btn.dataset.action === 'delete') return deleteLast();
     if (btn.dataset.action === 'percent') return inputPercent();
+    if (btn.dataset.action === 'sqrt') return inputSqrt();
     if (btn.dataset.op) return handleOperator(btn.dataset.op);
   });
 
